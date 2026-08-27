@@ -1,0 +1,29 @@
+# DQFarm — Encrypted key store example
+
+Đây là file **mẫu**. Key store thật được lưu ở local (`scripts/keys.enc`), không push lên repo.
+
+## Cấu trúc key store
+
+Key store là file AES-256-CBC encrypted (header `DQF1` + salt + iv + ciphertext). Mỗi key có dạng:
+
+```
+XXXX-XXX-XXX-XXX-XXX-XXX
+```
+
+Ví dụ (key không thật):
+```
+A7K-3X9-Q2M-8PR-8WD-LZ1
+```
+
+## Quy trình
+
+1. Người bán chạy `key_manager.cjs new` → tạo key + in ra → DM key cho khách
+2. Người bán chạy `gen_dq_loader.cjs <key>` → build loader mã hoá với key đó
+3. Push loader lên repo
+4. Khách paste `DQFarm.luau` vào executor → nhập key → chạy
+
+## ⚠️ Không bao giờ
+
+- Push key thật lên GitHub
+- Push source gốc (`dq_menu.luau`) lên GitHub
+- Chia sẻ file `.passphrase` hoặc `keys.enc`
